@@ -1,0 +1,156 @@
+using System.Drawing;
+using System.Reflection.Metadata.Ecma335;
+
+Console.Write("Выберите тип машины:\n1)Electric car;\n2)Auto;\nВведите цифру >> ");
+string playerKey = Console.ReadLine();
+Console.Write("Введите марку машины >> ");
+string make = Console.ReadLine();
+Console.Write("Введите модель машины >> ");
+string model = Console.ReadLine();
+Console.Write("Введите год выпуска машины >> ");
+int year = Convert.ToInt32(Console.ReadLine());
+
+Car car = new ElectricCar("Tesla", "Model S", 2019);
+/*
+if (playerKey == "1") car = new ElectricCar(make, model, year);
+else car = new Auto(make, model, year);
+Console.Write("Машина готова!\n");
+*/
+/*
+while (playerKey != "q") 
+{
+    Console.Write("Введите дистанцию(или q чтобы выйти) >> ");
+    playerKey = Console.ReadLine();
+    if (playerKey == "q")
+    {
+        car.getDescriptiveName();
+        Console.WriteLine("Завершение работы программы...");
+    }
+    else
+    {
+        int distance = Convert.ToInt32(playerKey);
+        while (distance > 0)
+        {
+            distance = car.waste(distance);
+        }
+        
+    }
+}
+*/
+
+Console.WriteLine($"{car.getEngineValue()} {car.getEngineConsumption()}");
+class Car
+{
+    private string make; // марка, мануфактура
+    private string model;
+    private int year;
+    private int odometerReading = 0;
+    private Engine engine = new Engine();
+    public Car(string make, string model, int year) { this.make = make; this.model = model; this.year = year; }
+
+    private bool refueling(int r)
+    {
+        if (engine.getValue() + r < engine.getSize() + 1)
+        {
+            engine.setValue(r);
+            return true;
+        }
+        else
+        {
+            describeEngin();
+            return false;
+        }
+    }
+    private void incrementOdometer(int distance) => this.odometerReading += distance;
+    private void describeEngin() => Console.WriteLine($"В этом автомобиле {this.engine.getType()} {this.engine.getSize()}.");
+
+    public int getEngineValue() { return this.engine.getValue(); }
+    public int getEngineConsumption() { return this.engine.getConsumption(); }
+    public void getDescriptiveName() => Console.WriteLine($"На одометре машины {this.year} {this.make} {this.model} насчитано {this.odometerReading} км.\n{engine.getValue()}");
+    public int waste(int distance) // расход
+    {
+        int consump = engine.getConsumption();
+        if (engine.getValue() < consump)
+        {
+            Console.Write($"Кольчнство топлива: {engine.getValue()}/{consump}.\nВведите дозаправку >> ");
+            int r = Convert.ToInt32(Console.ReadLine());
+            bool responce = false;
+            while (responce == false)
+            {
+                responce = refueling(r);
+            }
+        }
+        else
+        {
+            
+            if (distance >= 100)
+            {
+                distance -= 100;
+                incrementOdometer(100);
+                engine.changeValue(consump);
+                Console.WriteLine($"{distance} {engine.getValue()}");
+            }
+            else if (distance >= 10)
+            {
+                distance -= 10;
+                incrementOdometer(10);
+                engine.changeValue(consump / 10);
+                Console.WriteLine($"{distance} {engine.getValue()}");
+            }
+            else if (distance >= 1)
+            {
+                distance -= 1;
+                incrementOdometer(1);
+                engine.changeValue(consump / 100);
+                Console.WriteLine($"{distance} {engine.getValue()}");
+            }
+        }
+        return distance;
+    }
+}
+class Engine
+{
+    private int size, consumption, value;
+    private string type;
+    public Engine(int size, int consumption, int value) { this.size = size; this.consumption = consumption; this.value = value; type = ""; }
+    public Engine(string type, int size, int consumption, int value) { this.size = size; this.consumption = consumption; this.value = value; this.type = type; }
+    public string getType() { return this.type; }
+    public int getValue() { return value; }
+    public int getSize() { return size; }
+    public int getConsumption() { return consumption; }
+    public void setValue(int r) => this.value += r;
+    public void changeValue(int c) => this.value -= c;
+}
+class ElectricCar : Car
+{
+    private Engine engine;
+    private string engineType = "установлена батарея ёмкостью(кВт-ч)";
+    public ElectricCar(string make, string model, int year) : base(make, model, year)
+    {
+        int size, consumption, value;
+        Console.Write("Введите ёмкость батареи(в кВт-ч) >> ");
+        size = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Введите расход батареи(кВт/100км) >> ");
+        consumption = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Введите заряд батареи(в кВт) >> ");
+        value = Convert.ToInt32(Console.ReadLine());
+        this.engine = new Engine(engineType, size, consumption, value);
+    }
+}
+class Auto : Car
+{
+    private Engine engine;
+    private string engineType = "установлен бензо-бак объёмом(л)";
+    public Auto(string make, string model, int year) : base(make, model, year)
+    {
+        int size, consumption, value;
+        Console.Write("Введите ёмкость бензобака(в литрах) >> ");
+        size = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Введите расход топлива(л/100км) >> ");
+        consumption = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Введите количество топлива(в литрах) >> ");
+        value = Convert.ToInt32(Console.ReadLine());
+        this.engine = new Engine(engineType, size, consumption, value);
+    }
+    
+}

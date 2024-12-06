@@ -1,0 +1,14 @@
+C:\Users\prdb\Desktop\SomeProject321\bin\Debug\net8.0\SomeProject321.exe
+C:\Users\prdb\Desktop\SomeProject321\bin\Debug\net8.0\SomeProject321.deps.json
+C:\Users\prdb\Desktop\SomeProject321\bin\Debug\net8.0\SomeProject321.runtimeconfig.json
+C:\Users\prdb\Desktop\SomeProject321\bin\Debug\net8.0\SomeProject321.dll
+C:\Users\prdb\Desktop\SomeProject321\bin\Debug\net8.0\SomeProject321.pdb
+C:\Users\prdb\Desktop\SomeProject321\obj\Debug\net8.0\SomeProject321.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\prdb\Desktop\SomeProject321\obj\Debug\net8.0\SomeProject321.AssemblyInfoInputs.cache
+C:\Users\prdb\Desktop\SomeProject321\obj\Debug\net8.0\SomeProject321.AssemblyInfo.cs
+C:\Users\prdb\Desktop\SomeProject321\obj\Debug\net8.0\SomeProject321.csproj.CoreCompileInputs.cache
+C:\Users\prdb\Desktop\SomeProject321\obj\Debug\net8.0\SomeProject321.dll
+C:\Users\prdb\Desktop\SomeProject321\obj\Debug\net8.0\refint\SomeProject321.dll
+C:\Users\prdb\Desktop\SomeProject321\obj\Debug\net8.0\SomeProject321.pdb
+C:\Users\prdb\Desktop\SomeProject321\obj\Debug\net8.0\SomeProject321.genruntimeconfig.cache
+C:\Users\prdb\Desktop\SomeProject321\obj\Debug\net8.0\ref\SomeProject321.dll
